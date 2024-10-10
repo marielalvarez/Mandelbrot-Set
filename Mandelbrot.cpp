@@ -12,7 +12,7 @@ double zoomIn = 1.0;
 double minRe = -2.5, maxRe = 1;
 double minIm = -1, maxIm = 1;
 
-// Creating the visualization
+// creating the visualization
 void resetWindowAndImage(RenderWindow &window, Image &image, Texture &texture, Sprite &sprite)
 {
     window.create(VideoMode(width, height), "Mandelbrot");
@@ -48,7 +48,7 @@ int main(void)
         {
             if (e.type == Event::Closed)
                 window.close();
-            // First interaction - moving up/down/left/right
+            // first interaction - moving up/down/left/right
             if (e.type == Event::KeyPressed)
             {
                 double w = (maxRe - minRe) * 0.3;
@@ -71,7 +71,7 @@ int main(void)
                     minIm += h, maxIm += h;
                 }
 
-                // Change Resolution - '+' to increase, '-' to decrease
+                // change Resolution - '+' to increase, '-' to decrease
                 if (e.key.code == Keyboard::Add)
                 {
                     width += 100;
@@ -80,13 +80,13 @@ int main(void)
                 }
                 if (e.key.code == Keyboard::Subtract)
                 {
-                    width = max(800, width - 100); // Minimum resolution 800x600
+                    width = max(800, width - 100); // minimum resolution 800x600
                     height = max(600, height - 50);
                     resetWindowAndImage(window, image, texture, sprite);
                 }
             }
 
-            // The bigger the iteration, the clearer the image
+            // the bigger the iteration, the clearer the image
             if (e.type == Event::MouseWheelScrolled)
             {
                 if (e.MouseWheelScrolled)
@@ -103,7 +103,7 @@ int main(void)
                 }
             }
 
-            // Zooming in n out
+            // zooming in n out
             if (e.type == Event::MouseButtonPressed)
             {
                 auto zoom_x = [&](double z)
@@ -134,7 +134,7 @@ int main(void)
         }
 
         window.clear();
-// Better resolution - Mandelbrot calculation per pixel
+        // better resolution - Mandelbrot calculation per pixel
 #pragma omp parallel for
         for (int y = 0; y < height; y++)
             for (int x = 0; x < width; x++)
@@ -156,10 +156,10 @@ int main(void)
                 int g = r, b = r;
 
                 static const vector<Color> colors{
-                    {35, 21, 27},
-                    {158, 94, 121},
-                    {241, 232, 235},
-                    {194, 218, 184},
+                    {60, 0, 85},     
+                    {187, 232, 255}, 
+                    {230, 155, 218}, 
+                    {240, 240, 255}, 
                     {0, 2, 0},
                 };
 
@@ -169,7 +169,7 @@ int main(void)
                 {
                     double log_zn = log(re * re + im * im) / 2;
                     double nu = log(log_zn / log(2)) / log(2);
-                    iter = iter + 1 - nu; // Smooth iteration count
+                    iter = iter + 1 - nu;
                 }
                 double mu = 1.0 * iter / maxIter;
                 mu *= max_color;
