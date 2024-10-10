@@ -135,7 +135,6 @@ int main(void)
 
         window.clear();
         // better resolution - Mandelbrot calculation per pixel
-#pragma omp parallel for
         for (int y = 0; y < height; y++)
             for (int x = 0; x < width; x++)
             {
@@ -156,10 +155,11 @@ int main(void)
                 int g = r, b = r;
 
                 static const vector<Color> colors{
-                    {60, 0, 85},     
-                    {187, 232, 255}, 
-                    {230, 155, 218}, 
-                    {240, 240, 255}, 
+
+                    {60, 0, 85},
+                    {187, 232, 255},
+                    {230, 155, 218},
+                    {240, 240, 255},
                     {0, 2, 0},
                 };
 
